@@ -29,7 +29,7 @@ class RegisterController extends Controller
      *
      * @var string
      */
-    protected $redirectTo = '/home';
+    protected $redirectTo = '/my/account';
 
     /**
      * Create a new controller instance.
@@ -59,14 +59,14 @@ class RegisterController extends Controller
 
         $user = $this->create(['email' => $email, 'password' => $password]);
         if (!($user instanceof User)) {
-            back()->with("error", "Can't create object");
+            return back()->with("error", "Can't create object");
         }
 
         if ($isAuth) {
             $this->guard()->login($user);
         }
 
-        return redirect(route("account"))->with("success", "Success signin");
+        return redirect(route("account"))->with("success", "Success signup");
     }
 
     /**
